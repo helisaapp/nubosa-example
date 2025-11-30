@@ -36,7 +36,7 @@ Proyecto NestJS con ejemplo de conexión a nubosa con firmado.
    ```
 
 ## .env
-Se debe ejecutar la aplicación con un archivo .env
+Se debe ejecutar la aplicación con el archivo .env:
 ````
 NODE_ENV=development
 

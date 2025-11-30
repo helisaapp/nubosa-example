@@ -27,7 +27,7 @@ mvn spring-boot:run
    ```
 
 ## Variables de entorno
-Se debe ejecutar la aplicación con 
+Se debe ejecutar la aplicación con las variables de entorno:
 ````
 NUBOSA_ID_CLIENT=<id-client>;NUBOSA_SECRET=<secret>;NUBOSA_URL=https://billing-input-backend-qa.up.railway.app
 ````
