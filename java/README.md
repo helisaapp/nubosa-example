@@ -4,6 +4,7 @@ Proyecto Java Spring Boot con ejemplo de conexión a nubosa con firmado.
 
 Estructura solicitada:
 
+- `src/main/java/com/example/infraestructure/external/SignService.java`: Servicio de firmado para nubosa.
 - `src/main/java/com/example/infraestructure/external/NubosaApiService.java`: Servicio de conexión a nubosa.
 - `src/main/java/com/example/application/use_cases/TestUseCase.java`: Caso de uso de ejemplo petición get, traer una transacción.
 - `src/main/java/com/example/application/use-cases/TestPostUseCase.java`: Caso de uso de ejemplo petición post, crear/modificar una empresa.
