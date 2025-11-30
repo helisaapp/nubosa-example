@@ -1,10 +1,15 @@
 import {Injectable} from "@nestjs/common";
 import axios from 'axios';
-import {createHmac} from "crypto";
 import {envs} from "../../infrastructure/config/envs";
+import {SignService} from "../../infrastructure/external/sign.service";
 
 @Injectable()
 export class NubosaApiService {
+    constructor(private signService: SignService) {
+        this.signService = signService;
+    }
+
+
     /**
      * Metodo para conectarse a nubosa y traer la información de una transacción
      */
@@ -12,23 +17,30 @@ export class NubosaApiService {
         const idBilling = '07825037-eda9-4c58-acb6-bb7710dd928d';
         const time = new Date().getTime();
         const url = `/api/billing/${idBilling}`;
-        const signature = NubosaApiService.generateSignature(
+        const signature = this.signService.generateSignature(
             [envs.nubosaIdClient, `${time}`, url, ''],
             envs.nubosaSecret,
         )
-        const response = await axios.get(
-            envs.nubosaUrl + url,
-            {
-                headers: {
-                    'x-client-id': envs.nubosaIdClient,
-                    'x-timestamp': time,
-                    'x-signature': signature,
-                }
-            },
-        );
-        return {
-            status: response.status,
-            data: response.data,
+        try {
+            const response = await axios.get(
+                envs.nubosaUrl + url,
+                {
+                    headers: {
+                        'x-client-id': envs.nubosaIdClient,
+                        'x-timestamp': time,
+                        'x-signature': signature,
+                    }
+                },
+            );
+            return {
+                status: response.status,
+                data: response.data,
+            };
+        } catch (error) {
+            return {
+                status: error.response.status,
+                data: error.response.data,
+            }
         }
     }
 
@@ -38,30 +50,31 @@ export class NubosaApiService {
     async post(data: any) {
         const time = new Date().getTime();
         const url = `/api/company/${envs.nubosaIdClient}`;
-        const signature = NubosaApiService.generateSignature(
+        const signature = this.signService.generateSignature(
             [envs.nubosaIdClient, `${time}`, url, JSON.stringify(data)],
             envs.nubosaSecret,
         )
-        const response = await axios.post(
-            envs.nubosaUrl + url,
-            data,
-            {
-                headers: {
-                    'x-client-id': envs.nubosaIdClient,
-                    'x-timestamp': time,
-                    'x-signature': signature,
-                }
-            },
-        );
-        return {
-            status: response.status,
-            data: response.data,
+        try {
+            const response = await axios.post(
+                envs.nubosaUrl + url,
+                data,
+                {
+                    headers: {
+                        'x-client-id': envs.nubosaIdClient,
+                        'x-timestamp': time,
+                        'x-signature': signature,
+                    }
+                },
+            );
+            return {
+                status: response.status,
+                data: response.data,
+            };
+        } catch (error) {
+            return {
+                status: error.response.status,
+                data: error.response.data,
+            }
         }
-    }
-
-    public static generateSignature(params: string[], secret: string): string {
-        return createHmac('sha256', secret)
-            .update(params.join())
-            .digest('hex');
     }
 }
