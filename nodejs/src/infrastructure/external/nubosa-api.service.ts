@@ -61,7 +61,7 @@ export class NubosaApiService {
 
     public static generateSignature(params: string[], secret: string): string {
         return createHmac('sha256', secret)
-            .update(JSON.stringify(params.join()))
+            .update(params.join())
             .digest('hex');
     }
 }

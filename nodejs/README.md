@@ -1,6 +1,6 @@
 # Nubosa NestJS Example
 
-Proyecto NestJS con ejemplo de conexión con firmado.
+Proyecto NestJS con ejemplo de conexión a nubosa con firmado.
 
 ## Estructura
 - `src/infraestructure/external/nubosa-api.service.ts`: Servicio de conexión a nubosa.
