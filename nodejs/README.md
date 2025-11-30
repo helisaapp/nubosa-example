@@ -3,6 +3,7 @@
 Proyecto NestJS con ejemplo de conexión a nubosa con firmado.
 
 ## Estructura
+- `src/infraestructure/external/sign.service.ts`: Servicio de firmado para nubosa.
 - `src/infraestructure/external/nubosa-api.service.ts`: Servicio de conexión a nubosa.
 - `src/application/use-cases/test.use-case.ts`: Caso de uso de ejemplo petición get, traer una transacción.
 - `src/application/use-cases/test-post.use-case.ts`: Caso de uso de ejemplo petición post, crear/modificar una empresa.
@@ -33,6 +34,17 @@ Proyecto NestJS con ejemplo de conexión a nubosa con firmado.
    ```json
    { "status": "<http-status>", "data": "<nubosa-response>" }
    ```
+
+## .env
+Se debe ejecutar la aplicación con un archivo .env
+````
+NODE_ENV=development
+
+NUBOSA_URL=https://billing-input-backend-qa.up.railway.app
+NUBOSA_ID_CLIENT=<id-client>
+NUBOSA_SECRET=<secret>
+
+````
 
 ## Requisitos
 - Node.js >= 18

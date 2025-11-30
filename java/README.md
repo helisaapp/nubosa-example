@@ -26,6 +26,12 @@ mvn spring-boot:run
    { "status": "<http-status>", "data": "<nubosa-response>" }
    ```
 
+## Variables de entorno
+Se debe ejecutar la aplicación con 
+````
+NUBOSA_ID_CLIENT=<id-client>;NUBOSA_SECRET=<secret>;NUBOSA_URL=https://billing-input-backend-qa.up.railway.app
+````
+
 ## Requisitos
 - Java 17+
 - Maven 3.9+
