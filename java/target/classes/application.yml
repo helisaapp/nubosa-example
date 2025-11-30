@@ -1,6 +1,0 @@
-server:
-  port: 4000
-nubosa:
-  url: ${NUBOSA_URL}
-  idClient: ${NUBOSA_ID_CLIENT}
-  secret: ${NUBOSA_SECRET}
